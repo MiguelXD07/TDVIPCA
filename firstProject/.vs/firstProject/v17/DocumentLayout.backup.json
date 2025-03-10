@@ -1,0 +1,57 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\migue\\TDVIPCA\\firstProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FDA42A91-CB40-4C14-A39A-4CB03910BE14}|firstProject\\firstProject.csproj|c:\\users\\migue\\tdvipca\\firstproject\\firstproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDA42A91-CB40-4C14-A39A-4CB03910BE14}|firstProject\\firstProject.csproj|solutionrelative:firstproject\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FDA42A91-CB40-4C14-A39A-4CB03910BE14}|firstProject\\firstProject.csproj|c:\\users\\migue\\tdvipca\\firstproject\\firstproject\\content\\level1.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{FDA42A91-CB40-4C14-A39A-4CB03910BE14}|firstProject\\firstProject.csproj|solutionrelative:firstproject\\content\\level1.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "level1.txt",
+              "DocumentMoniker": "C:\\Users\\migue\\TDVIPCA\\firstProject\\firstProject\\Content\\level1.txt",
+              "RelativeDocumentMoniker": "firstProject\\Content\\level1.txt",
+              "ToolTip": "C:\\Users\\migue\\TDVIPCA\\firstProject\\firstProject\\Content\\level1.txt",
+              "RelativeToolTip": "firstProject\\Content\\level1.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-03-07T16:30:20.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Game1.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\TDVIPCA\\firstProject\\firstProject\\Game1.cs",
+              "RelativeDocumentMoniker": "firstProject\\Game1.cs",
+              "ToolTip": "C:\\Users\\migue\\TDVIPCA\\firstProject\\firstProject\\Game1.cs",
+              "RelativeToolTip": "firstProject\\Game1.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAIAzwDIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T12:44:54.468Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
