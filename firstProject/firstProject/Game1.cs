@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
 
 namespace firstProject;
 
@@ -9,14 +11,17 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-
+    private SpriteFont font; //Variavel de fonte de texto
     private int nrLinhas = 0;
     private int nrColunas = 0;
-    private SpriteFont font; //Variavel de fonte de texto
-    private char[,] level;
-
     private Texture2D player, dot, box, wall; //Load images Texture
+    private Player firstProject;
     int tileSize = 64; //potencias de 2 (operações binárias)
+
+    //Privare char[,] level
+    private char[,] level;
+    public List<Point> boxes;
+
 
     public Game1()
     {
@@ -33,7 +38,6 @@ public class Game1 : Game
         _graphics.PreferredBackBufferWidth = tileSize * level.GetLength(0); //definição da largura
         _graphics.ApplyChanges(); //aplica a atualização da janela
 
-        // TODO: Add your initialization logic here
 
         base.Initialize();
     }
@@ -49,7 +53,6 @@ public class Game1 : Game
         box = Content.Load<Texture2D>("CrateDark_Purple");
         wall = Content.Load<Texture2D>("Wall_Brown");
 
-        // TODO: use this.Content to load your game content here
     }
 
     protected override void Update(GameTime gameTime)
@@ -57,7 +60,7 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-        // TODO: Add your update logic here
+        firstProject.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -81,12 +84,12 @@ public class Game1 : Game
 
                 switch (level[x, y])
                 {
-                    case 'Y':
-                        _spriteBatch.Draw(player, position, Color.White);
-                        break;
-                    case '#':
-                        _spriteBatch.Draw(box, position, Color.White);
-                        break;
+                    //case 'Y':
+                    //    _spriteBatch.Draw(player, position, Color.White);
+                    //    break;
+                    //case '#':
+                    //    _spriteBatch.Draw(box, position, Color.White);
+                    //    break;
                     case '.':
                         _spriteBatch.Draw(dot, position, Color.White);
                         break;
@@ -96,17 +99,27 @@ public class Game1 : Game
                 }
             }
         }
-        _spriteBatch.End();
+        position.X = firstProject.Position.X * tileSize; //posição do Player
+        position.Y = firstProject.Position.Y * tileSize; //posição do Player
+        _spriteBatch.Draw(player, position, Color.White); //desenha o Player
 
-        // TODO: Add your drawing code here
+        foreach (Point b in boxes)
+        {
+            position.X = b.X * tileSize;
+            position.Y = b.Y * tileSize;
+            _spriteBatch.Draw(box, position, Color.White);
+        }
+
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }
     void LoadLevel(string levelFile)
     {
+        boxes = new List<Point>();
         string[] linhas = File.ReadAllLines($"Content/{levelFile}"); // "Content/" + level
-        nrLinhas = linhas.Length;
-        nrColunas = linhas[0].Length;
+        int nrLinhas = linhas.Length;
+        int nrColunas = linhas[0].Length;
 
         level = new char[nrColunas, nrLinhas];
         
@@ -114,9 +127,38 @@ public class Game1 : Game
         {
             for (int y = 0; y < nrLinhas; y++)
             {
-                level[x, y] = linhas[y][x];
+                if (linhas[y][x] == '#')
+                {
+                    boxes.Add(new Point(x, y));
+                    level[x, y] = ' '; // put a blank instead of the box '#'
+                }
+                else if (linhas[y][x] == 'Y')
+                {
+                    firstProject = new Player(this, x, y);
+                    level[x, y] = ' '; // put a blank instead of the sokoban 'Y'
+                }
+                else
+                {
+                    level[x, y] = linhas[y][x];
+                }
+
             }
         }
+    }
+    public bool HasBox(int x, int y) // x e y é a posição do Player
+    {
+        foreach (Point b in boxes)
+        {
+            if (b.X == x && b.Y == y) return true; // se a caixa tiver a mesma posição do Player
+        }
+        return false;
+    }
+    public bool FreeTile(int x, int y)
+    {
+        if (level[x, y] == 'X') return false; // se for uma parede está ocupada
+        if (HasBox(x, y)) return false; // verifica se é uma caixa
+        return true;
+        /* The same as: return level[x,y] != 'X' && !HasBox(x,y); */
     }
 
 
