@@ -4,13 +4,31 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character1.png</File>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character10.png</File>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character2.png</File>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character3.png</File>
     <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character4.png</File>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character5.png</File>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character6.png</File>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character7.png</File>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character8.png</File>
+    <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Character9.png</File>
     <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/CrateDark_Purple.png</File>
     <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/EndPoint_Purple.png</File>
     <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/File.spritefont</File>
     <File>C:/Users/migue/TDVIPCA/firstProject/firstProject/Content/Wall_Brown.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -42,3 +42,12 @@ C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Conten
 C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\level1.txt
 C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\CrateDark_Purple.xnb
 C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\EndPoint_Purple.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character1.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character10.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character2.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character3.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character5.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character6.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character7.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character8.xnb
+C:\Users\migue\TDVIPCA\firstProject\firstProject\bin\Debug\net6.0-windows\Content\Character9.xnb
