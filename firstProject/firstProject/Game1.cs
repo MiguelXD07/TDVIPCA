@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace firstProject;
 
 public class Game1 : Game
@@ -15,14 +16,13 @@ public class Game1 : Game
     private int nrLinhas = 0;
     private int nrColunas = 0;
     private SpriteFont font; // Variavel de fonte de texto
-    //private char[,] level;
     public char[,] level;
 
     private Texture2D dot, box, wall; //Load images Texture
-    private Texture2D[] player;
-    int tileSize = 64; //potencias de 2 (operações binárias)
+    public int tileSize = 64;
     private Player firstProject;
     public List<Point> boxes;
+
 
     public Game1()
     {
@@ -31,11 +31,6 @@ public class Game1 : Game
         IsMouseVisible = true;
     }
 
-    public enum Direction
-    {
-        Up, Down, Left, Right // 0, 1, 2, 3
-    }
-    public Direction direction = Direction.Down;
 
     protected override void Initialize()
     {
@@ -46,7 +41,7 @@ public class Game1 : Game
         _graphics.PreferredBackBufferWidth = tileSize * level.GetLength(0); //definição da largura
         _graphics.ApplyChanges(); //aplica a atualização da janela
 
-
+        firstProject.loadContents();
 
         base.Initialize();
     }
@@ -59,13 +54,6 @@ public class Game1 : Game
         dot = Content.Load<Texture2D>("EndPoint_Purple");
         box = Content.Load<Texture2D>("CrateDark_Purple");
         wall = Content.Load<Texture2D>("Wall_Brown");
-
-        player = new Texture2D[4];
-        player[(int)Direction.Down] = Content.Load<Texture2D>("Character4");
-        player[(int)Direction.Up] = Content.Load<Texture2D>("Character7");
-        player[(int)Direction.Left] = Content.Load<Texture2D>("Character1");
-        player[(int)Direction.Right] = Content.Load<Texture2D>("Character2");
-
 
         // TODO: use this.Content to load your game content here
     }
@@ -90,8 +78,6 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
-        //_spriteBatch.DrawString(font, "O texto que quiser", new Vector2(10, 10), Color.White);
-        //_spriteBatch.DrawString(font, "O texto que quiser", new Vector2(100, 300), Color.Black);
         Rectangle position = new Rectangle(0, 0, tileSize, tileSize); //calculo do retangulo a depender do tileSize
         for (int x = 0; x < level.GetLength(0); x++)  //pega a primeira dimensão
         {
@@ -103,12 +89,6 @@ public class Game1 : Game
                 // Leitura a partir da matriz
                 switch (level[x, y])
                 {
-                    //case 'Y':
-                    //      _spriteBatch.Draw(player, position, Color.White);
-                    //      break;
-                    //case '#':
-                    //    _spriteBatch.Draw(box, position, Color.White);
-                    //    break;
                     case '.':
                         _spriteBatch.Draw(dot, position, Color.White);
                         break;
@@ -125,13 +105,9 @@ public class Game1 : Game
                     _spriteBatch.Draw(box, position, Color.White);
                 }
 
-                // Leitura a partir da classe Player
-                position.X = firstProject.Position.X * tileSize; //posição do Player
-                position.Y = (firstProject.Position.Y) * tileSize; //posição do Player
-                _spriteBatch.Draw(player[(int)direction], position, Color.White); //desenha o Player
+                firstProject.Draw(_spriteBatch);
             }
         }
-
 
         _spriteBatch.End();
 
