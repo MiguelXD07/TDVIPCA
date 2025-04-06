@@ -36,13 +36,10 @@ public class Game1 : Game
     {
         // TODO: Add your initialization logic here
         LoadLevel("level1.txt");
-
-        _graphics.PreferredBackBufferHeight = tileSize * level.GetLength(1); //definição da altura
+        _graphics.PreferredBackBufferHeight = tileSize * (1 + level.GetLength(1)); //definição da altura
         _graphics.PreferredBackBufferWidth = tileSize * level.GetLength(0); //definição da largura
         _graphics.ApplyChanges(); //aplica a atualização da janela
-
         firstProject.loadContents();
-
         base.Initialize();
     }
 

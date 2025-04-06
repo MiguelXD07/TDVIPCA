@@ -29,7 +29,9 @@ namespace firstProject
         private Texture2D[][] sprites;
         private Direction direction = Direction.Down;
 
-
+        private int delta = 0;
+        private int speed = 2; // NOTE: must be tileSize divider
+        private Vector2 directionVector;
 
 
 
@@ -48,33 +50,33 @@ namespace firstProject
         {
             sprites = new Texture2D[4][];
 
-            sprites[(int)Direction.Up] = new[] 
+            sprites[(int)Direction.Up] = new[]
             {
             game.Content.Load<Texture2D>("Character7"),
             game.Content.Load<Texture2D>("Character8"),
-            game.Content.Load<Texture2D>("Character9") 
+            game.Content.Load<Texture2D>("Character9")
             };
 
 
-            sprites[(int)Direction.Down] = new[] 
+            sprites[(int)Direction.Down] = new[]
             {
             game.Content.Load<Texture2D>("Character4"),
             game.Content.Load<Texture2D>("Character5"),
-            game.Content.Load<Texture2D>("Character6") 
+            game.Content.Load<Texture2D>("Character6")
             };
 
 
-            sprites[(int)Direction.Left] = new[] 
+            sprites[(int)Direction.Left] = new[]
             {
             game.Content.Load<Texture2D>("Character1"),
-            game.Content.Load<Texture2D>("Character10") 
+            game.Content.Load<Texture2D>("Character10")
             };
 
 
-            sprites[(int)Direction.Right] = new[] 
+            sprites[(int)Direction.Right] = new[]
             {
             game.Content.Load<Texture2D>("Character2"),
-            game.Content.Load<Texture2D>("Character3") 
+            game.Content.Load<Texture2D>("Character3")
             };
 
         }
@@ -82,47 +84,66 @@ namespace firstProject
 
         public void Draw(SpriteBatch sb)
         {
-            Rectangle rect = new Rectangle(game.tileSize * position.X,
-                                           game.tileSize * position.Y,
-                                           game.tileSize, game.tileSize);
-            sb.Draw(sprites[(int)direction][0], rect, Color.White); //desenha o Player
+            Vector2 pos = position.ToVector2() * game.tileSize;
+            int frame = 0;
+            if (delta > 0)
+            {
+                pos -= (game.tileSize - delta) * directionVector;
+                float animSpeed = 8f;
+                frame = (int)((delta / speed) % ((int)animSpeed * sprites[(int)direction].Length) / animSpeed);
+            }
+            Rectangle rect = new Rectangle(pos.ToPoint(), new Point(game.tileSize));
+            sb.Draw(sprites[(int)direction][frame], rect, Color.White); //desenha o Player
         }
-
 
 
         public void Update(GameTime gameTime)
         {
-            KeyboardState kState = Keyboard.GetState();
-            if (keysReleased)
+            if (delta > 0)
             {
-                Point lastPosition = position;
-                keysReleased = false;
-                if ((kState.IsKeyDown(Keys.A)) || (kState.IsKeyDown(Keys.Left)))
+                delta = (delta + speed) % game.tileSize;
+            }
+            else
+            {
+                KeyboardState kState = Keyboard.GetState();
+                if
+                (kState.IsKeyDown(Keys.A))
                 {
                     position.X--;
-                    //game.direction = Direction.Left;
                     direction = Direction.Left;
-                }
-                else if ((kState.IsKeyDown(Keys.W)) || (kState.IsKeyDown(Keys.Up)))
-                {
-                    position.Y--;
-                    //game.direction = Direction.Up;
-                    direction = Direction.Up;
-                }
-                else if ((kState.IsKeyDown(Keys.S)) || (kState.IsKeyDown(Keys.Down)))
-                {
-                    position.Y++;
-                    //game.direction = Direction.Down;
-                    direction = Direction.Down;
-                }
-                else if ((kState.IsKeyDown(Keys.D)) || (kState.IsKeyDown(Keys.Right)))
-                {
-                    position.X++;
-                    //game.direction = Direction.Right;
-                    direction = Direction.Right;
+                    delta = speed;
+                    // directionVector = new Vector2(-1, 0);
+                    directionVector = -Vector2.UnitX;
                 }
 
-                else keysReleased = true;
+                else if
+                (kState.IsKeyDown(Keys.W))
+                {
+                    position.Y--;
+                    direction = Direction.Up;
+                    delta = speed;
+                    directionVector = -Vector2.UnitY;
+                }
+
+                else if
+                (kState.IsKeyDown(Keys.S))
+                {
+                    position.Y++;
+                    direction = Direction.Down;
+                    delta = speed;
+                    directionVector = Vector2.UnitY;
+                }
+
+                else if
+                (kState.IsKeyDown(Keys.D))
+                {
+                    position.X++;
+                    direction = Direction.Right;
+                    delta = speed;
+                    directionVector = Vector2.UnitX;
+                }
+
+                Point lastPosition = position;
 
                 // destino é caixa?
                 if (game.HasBox(position.X, position.Y))
@@ -130,46 +151,30 @@ namespace firstProject
                     int deltaX = position.X - lastPosition.X;
                     int deltaY = position.Y - lastPosition.Y;
                     Point boxTarget = new Point(deltaX + position.X, deltaY + position.Y);
+
                     // se sim, caixa pode mover-se?
                     if (game.FreeTile(boxTarget.X, boxTarget.Y))
                     {
                         for (int i = 0; i < game.boxes.Count; i++)
-                        {
                             if (game.boxes[i].X == position.X && game.boxes[i].Y == position.Y)
-                            {
                                 game.boxes[i] = boxTarget;
-                            }
-                        }
                     }
                     else
                     {
                         position = lastPosition;
+                        delta = 0;
                     }
                 }
                 else
                 {
                     // se não é caixa, se não está livre, parado!
                     if (!game.FreeTile(position.X, position.Y))
+                    {
+                        delta = 0;
                         position = lastPosition;
+                    }
                 }
-            }
-
-
-            else
-            {
-                if (kState.IsKeyUp(Keys.A) && kState.IsKeyUp(Keys.W) &&
-                    kState.IsKeyUp(Keys.S) && kState.IsKeyUp(Keys.D) && 
-                    kState.IsKeyUp(Keys.Left) && kState.IsKeyUp(Keys.Up) &&
-                    kState.IsKeyUp(Keys.Down) && kState.IsKeyUp(Keys.Right))
-                {
-                    keysReleased = true;
-                }
-            
             }
         }
-
-
     }
-
-
 }
